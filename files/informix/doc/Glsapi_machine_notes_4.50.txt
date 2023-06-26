@@ -1,0 +1,41 @@
+
+                      =================================
+                            MACHINE SPECIFIC NOTES
+                                    FOR
+                 IBM Informix Client-SDK 4.50.FC5 PRODUCT RELEASE
+                             GLS API Version 7.0
+                             On Linux Intel 64bit
+                               DATE: 30 Nov 2020 
+                      =================================
+
+OS Information : Built on Red Hat Enterprise Linux ES release 7.4 (Maipo)
+                 Certified on SUSE SLES 12.3 and 15,
+                 Ubuntu Server Edition 16.04 LTS and 17.10.
+   
+Machine Specific Notes
+======================
+
+1. This product was built on Red Hat Enterprise Linux ES release 7.4
+   (Kernel:  3.10.0-693, Glibc: 2.17) for x86_64 compatible processors.
+   The following compilers were used:
+
+        gcc and g++ compiler 4.8.5 20150623 (Red Hat 4.8.5-16)
+
+   Installing the product on Ubuntu or Debian requires RPM to be installed
+   and initialized. After RPM installed, use the following commands to 
+   initialize RPM:
+
+        mkdir -p /var/lib/rpm 
+        rpm --initdb
+
+   The bc utility is required by the product installer, and needs to be 
+   installed on Ubuntu.
+
+Check the following web site for the latest Linux system requirements:
+
+   http://www-01.ibm.com/support/docview.wss?rs=630&uid=swg27016673
+
+
+(c) Copyright IBM Corp. 2002, 2017
+(c) Copyright HCL Technologies Ltd. 2017, 2020.  All Rights Reserved.
+

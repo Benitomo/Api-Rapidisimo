@@ -1,0 +1,2 @@
+#dbservername   nettype   hostname   servicename   options
+bdlinux_tcp     onsoctcp        bdbtwholding    1526
