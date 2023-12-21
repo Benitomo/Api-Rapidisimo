@@ -1,4 +1,5 @@
 requests==2.26.0
 fastapi==0.68.1
 mysql-connector-python==8.0.27
-pyodbc==4.0.32
+pyodbc==4.0.35
+uvicorn==0.20.0

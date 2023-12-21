@@ -27,7 +27,7 @@ COPY files/informix/${CSDK} /tmp/
 ENV INFORMIXDIR /opt/IBM/Informix_Client-SDK
 ENV ODBCINI /opt/IBM/Informix_Client-SDK/etc/odbc.ini
 ENV INFORMIXSERVER bdlinux_tcp
-ENV LD_LIBRARY_PATH=$INFORMIXDIR/lib
+ENV LD_LIBRARY_PATH=$INFORMIXDIR/lib:/usr/local/instantclient_21_1
 RUN mkdir -p ${CSDK_TMPDIR} \
     && echo "paso 1" \
     && tar -xf /tmp/${CSDK} -C ${CSDK_TMPDIR} \
@@ -54,6 +54,21 @@ ENV DB_LOCALE=es_ES.819
 
 COPY odbc.ini /opt/IBM/Informix_Client-SDK/etc/
 
+#instalacion cx oracle
+
+# Install Oracle Instant Client
+RUN apt-get install -y libaio1 unzip
+
+# Download and install Oracle Instant Client
+ADD https://download.oracle.com/otn_software/linux/instantclient/211000/instantclient-basic-linux.x64-21.1.0.0.0.zip /tmp/
+ADD https://download.oracle.com/otn_software/linux/instantclient/211000/instantclient-sdk-linux.x64-21.1.0.0.0.zip /tmp/
+RUN unzip /tmp/instantclient-basic-linux.x64-21.1.0.0.0.zip -d /usr/local/
+RUN unzip /tmp/instantclient-sdk-linux.x64-21.1.0.0.0.zip -d /usr/local/
+RUN ln -s /usr/local/instantclient_21_1 /usr/local/instantclient
+RUN ldconfig
+
+# Install cx_Oracle
+
 RUN apt update && apt -y upgrade \
     && apt -y install software-properties-common curl \
     && add-apt-repository -y ppa:deadsnakes/ppa \
@@ -65,12 +80,14 @@ RUN apt update && apt -y upgrade \
     && apt-get clean \
     && apt-get autoremove
 
+RUN pip install cx-Oracle
 
 RUN apt-get update && apt-get install -y \
     python3-tk \
     curl \
     && rm -rf /var/lib/apt/lists/*
 
+RUN apt-get update && apt-get install -y g++
 RUN pip3 install -U pip setuptools 
 
 RUN mkdir /opt/app
